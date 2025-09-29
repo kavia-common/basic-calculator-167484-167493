@@ -1,104 +1,203 @@
-/* CSS Variables for Theme Management */
+/* Ocean Professional Theme */
+/* Color System */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --primary: #2563EB;
+  --secondary: #F59E0B;
+  --success: #F59E0B;
+  --error: #EF4444;
+
+  --bg: #f9fafb;
+  --surface: #ffffff;
+  --text: #111827;
+
+  --shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.10);
+  --ring: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
-}
-
-.App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+/* App background and layout */
+.ocean-app {
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background: var(--bg);
+  color: var(--text);
+  position: relative;
+  overflow: hidden;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
 }
 
-.App-logo {
-  height: 40vmin;
+.ocean-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(1200px 600px at 70% -10%, rgba(37,99,235,0.12), transparent),
+              radial-gradient(900px 500px at -10% 110%, rgba(245,158,11,0.12), transparent);
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+.ocean-container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 48px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
+  gap: 18px;
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+.ocean-header {
+  text-align: center;
+  margin-bottom: 4px;
 }
 
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
+.ocean-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  color: var(--text);
+}
+
+.ocean-subtitle {
+  margin: 4px 0 0;
   font-size: 14px;
-  font-weight: 600;
+  color: rgba(17, 24, 39, 0.6);
+}
+
+/* Calculator Panel */
+.calc-panel {
+  width: 100%;
+  background: var(--surface);
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(17, 24, 39, 0.06);
+  backdrop-filter: blur(6px);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.calc-panel:focus-within {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* Display */
+.calc-display {
+  background: linear-gradient(180deg, #f9fafb 0%, #ffffff 100%);
+  border: 1px solid rgba(17, 24, 39, 0.06);
+  border-radius: 14px;
+  padding: 16px 14px;
+  min-height: 82px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: right;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow-sm) inset;
+}
+
+.calc-display .history {
+  font-size: 12px;
+  color: rgba(17, 24, 39, 0.5);
+  min-height: 18px;
+  user-select: none;
+}
+
+.calc-display .value {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Grid */
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+/* Buttons */
+.calc-btn {
+  appearance: none;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 12px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  background: #f3f4f6;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.12s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s;
+  outline: none;
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+.calc-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.10);
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+.calc-btn:active {
+  transform: translateY(0px);
+  box-shadow: var(--shadow-sm);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.calc-btn:focus-visible {
+  box-shadow: var(--shadow-sm), var(--ring);
+}
+
+/* Variants */
+.calc-btn.op {
+  background: rgba(37, 99, 235, 0.10);
+  color: #1e3a8a;
+  border: 1px solid rgba(37, 99, 235, 0.25);
+}
+
+.calc-btn.op.active {
+  background: rgba(37, 99, 235, 0.18);
+  color: #1d4ed8;
+}
+
+.calc-btn.equal {
+  background: linear-gradient(180deg, #2563EB 0%, #1d4ed8 100%);
+  color: #ffffff;
+  border: 1px solid rgba(37, 99, 235, 0.4);
+}
+
+.calc-btn.equal:hover {
+  filter: brightness(1.04);
+}
+
+.calc-btn.clear {
+  background: rgba(239, 68, 68, 0.10);
+  color: #991b1b;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.calc-btn.zero {
+  grid-column: span 2;
+}
+
+/* Footer */
+.ocean-footer {
+  font-size: 12px;
+  color: rgba(17, 24, 39, 0.5);
+  margin-top: 4px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 420px) {
+  .ocean-container {
+    padding: 28px 12px;
   }
-  to {
-    transform: rotate(360deg);
+  .calc-btn {
+    padding: 12px 10px;
+    font-size: 17px;
   }
-}
-
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
+  .calc-display .value {
+    font-size: 28px;
   }
 }
